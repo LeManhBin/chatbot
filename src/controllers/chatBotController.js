@@ -5,7 +5,7 @@ const chatBotController = {
   },
 
   getWebhook: async (req, res) => {
-    let VERIFY_TOKEN = "chuoinaydetest19052001";
+    let VERIFY_TOKEN = process.env.VERIFY_TOKEN;
     // Parse the query params
     let mode = req.query["hub.mode"];
     let token = req.query["hub.verify_token"];
