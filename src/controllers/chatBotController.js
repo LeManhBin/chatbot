@@ -19,6 +19,10 @@ function handleMessage(sender_psid, received_message) {
       response = {
         text: `Hello`,
       };
+    } else if (received_message.text == "văn huy") {
+      response = {
+        text: `Huy con căk`,
+      };
     }
   } else if (received_message.attachments) {
     // Get the URL of the message attachment
