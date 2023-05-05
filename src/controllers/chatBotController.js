@@ -2,28 +2,33 @@ require("dotenv").config();
 import request from "request";
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 const VERIFY_TOKEN = process.env.VERIFY_TOKEN;
-
-function handleMessage(sender_psid, received_message) {
+const result = "";
+const fetchData = async (payload) => {
+  const res = await axios.post("https://bot.botlly.com/api/turbo", payload, {
+    headers: {
+      "x-api-key": "qkx8xfzhqQAn1KhJjfyNT3BlbkFy4",
+    },
+  });
+  if (res.status === 200) {
+    result = res.data.choices[0].message.content;
+    return result;
+  } else {
+    console.log("Error");
+  }
+};
+async function handleMessage(sender_psid, received_message) {
   let response;
-
+  const prompt = {
+    prompt: received_message.text,
+  };
+  console.log(prompt, "------prompt--------");
+  await fetchData(prompt);
   // Checks if the message contains text
   if (received_message.text) {
     response = {
-      text: `Bạn vừa nói là ${received_message.text}`,
+      text: result,
     };
-    if (received_message.text == "Chào") {
-      response = {
-        text: `Chào bạn`,
-      };
-    } else if (received_message.text == "Hello") {
-      response = {
-        text: `Hello`,
-      };
-    } else if (received_message.text == "văn huy") {
-      response = {
-        text: `Huy con căk`,
-      };
-    }
+    console.log(result, "----result------");
   } else if (received_message.attachments) {
     // Get the URL of the message attachment
     let attachment_url = received_message.attachments[0].payload.url;
