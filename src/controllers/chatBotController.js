@@ -14,7 +14,8 @@ const fetchData = async (payload) => {
     result = res.data.choices[0].message.content;
     return result;
   } else {
-    console.log("Error");
+    result = "Lỗi rồi :))";
+    return result;
   }
 };
 async function handleMessage(sender_psid, received_message) {
